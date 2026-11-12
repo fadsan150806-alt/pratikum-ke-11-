@@ -1,0 +1,467 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Perpustakaan API",
+        "description": "REST API Laravel untuk sistem perpustakaan.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Menampilkan daftar buku",
+                "operationId": "ce8d613abf76a7abf32760951abad031",
+                "responses": {
+                    "200": {
+                        "description": "Daftar buku berhasil diambil"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Menambahkan buku",
+                "operationId": "fe5483369d85c24b081bee648657f363",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author",
+                                    "isbn",
+                                    "published_year",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laskar Pelangi"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Andrea Hirata"
+                                    },
+                                    "publisher": {
+                                        "type": "string",
+                                        "example": "Bentang Pustaka"
+                                    },
+                                    "isbn": {
+                                        "type": "string",
+                                        "example": "9789793062792"
+                                    },
+                                    "published_year": {
+                                        "type": "integer",
+                                        "example": 2005
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Novel tentang anak-anak Belitung."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Buku berhasil dibuat"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            }
+        },
+        "/api/books/{book}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Menampilkan detail buku",
+                "operationId": "e74599ea3162ba626e0d7ebad7e13bc8",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID buku",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail buku berhasil diambil"
+                    },
+                    "404": {
+                        "description": "Buku tidak ditemukan"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Mengubah data buku",
+                "operationId": "7ec7d74bd89ffe629a5a303a16862690",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID buku",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Laskar Pelangi Updated"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Andrea Hirata"
+                                    },
+                                    "publisher": {
+                                        "type": "string",
+                                        "example": "Bentang Pustaka"
+                                    },
+                                    "isbn": {
+                                        "type": "string",
+                                        "example": "9789793062792"
+                                    },
+                                    "published_year": {
+                                        "type": "integer",
+                                        "example": 2005
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 15
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Deskripsi buku."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Buku berhasil diperbarui"
+                    },
+                    "404": {
+                        "description": "Buku tidak ditemukan"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Menghapus buku",
+                "operationId": "cc933965a96cb735f19ebba03c6e3e2c",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "ID buku",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Buku berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Buku tidak ditemukan"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Registrasi pengguna",
+                "operationId": "b7bfd2ae109f3a47ded9f9004294932c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Fadli Hasan"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "fadli@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registrasi berhasil"
+                    },
+                    "422": {
+                        "description": "Validasi gagal"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login pengguna",
+                "operationId": "6e5bcf46da5b34c03877b9f4a9437dda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "admin@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    },
+                                    "device_name": {
+                                        "type": "string",
+                                        "example": "Swagger"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login berhasil"
+                    },
+                    "422": {
+                        "description": "Email atau password salah"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            }
+        },
+        "/api/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Menampilkan profil pengguna yang sedang login",
+                "operationId": "6bc73e6c0d68a4fb2f2d310e56ae7573",
+                "responses": {
+                    "200": {
+                        "description": "Profil pengguna berhasil diambil"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout pengguna",
+                "operationId": "ac027d69f6be303664707f87ac61f411",
+                "responses": {
+                    "200": {
+                        "description": "Logout berhasil"
+                    },
+                    "401": {
+                        "description": "Tidak terautentikasi"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://127.0.0.1:8000",
+                        "description": "Local Development Server"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "Sanctum Token"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Autentikasi pengguna"
+        },
+        {
+            "name": "Books",
+            "description": "CRUD data buku"
+        }
+    ]
+}
